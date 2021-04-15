@@ -17,6 +17,18 @@ class main_app(QMainWindow, FORM_CLASS):
         QMainWindow.__init__(self)
         self.setupUi(self)
 
+    def handel_buttons(self):
+        pass 
+
+    def handel_browse(self):
+        pass 
+
+    def handel_progress(self):
+        pass
+
+    def download(self):
+        pass
+
 def main():
     app = QApplication(sys.argv)
     window = main_app()
