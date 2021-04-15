@@ -7,6 +7,7 @@ from PyQt5.uic import loadUiType
 import os 
 from os import path
 import sys
+import urllib.request
 
 FORM_CLASS,_= loadUiType(path.join(path.dirname(__file__),"main.ui"))
 
