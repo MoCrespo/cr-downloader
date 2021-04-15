@@ -16,6 +16,11 @@ class main_app(QMainWindow, FORM_CLASS):
         super(main_app,self).__init__(parent)
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.handel_UI()
+
+    def handel_UI(self):
+        self.setWindowTitle("Cr Downloader")
+        self.setFixedSize(540,242)
 
     def handel_buttons(self):
         pass 
