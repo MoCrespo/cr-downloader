@@ -18,22 +18,39 @@ class main_app(QMainWindow, FORM_CLASS):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.handel_UI()
+        self.handel_buttons()
 
     def handel_UI(self):
         self.setWindowTitle("Cr Downloader")
         self.setFixedSize(540,242)
 
     def handel_buttons(self):
-        pass 
+        self.pushButton.clicked.connect(self.download) 
 
     def handel_browse(self):
         pass 
 
-    def handel_progress(self):
-        pass
+    def handel_progress(self, blocknum, blocksize, totalsize):
+        read = blocknum * blocksize
+
+        if totalsize > 0:
+            percent = read * 100 / totalsize
+            self.progressBar.setValue(percent)
+            QApplication.processEvents() # Not Responding 
 
     def download(self):
-        pass
+        url = self.lineEdit.text()
+        save_location = self.lineEdit_2.text()
+        try:
+
+            urllib.request.urlretrieve(url, save_location, self.handel_progress)
+        except Exception:
+            QMessageBox.warning(self, "Download Error", "The download faild")
+            return
+        QMessageBox.information(self, "Download Completed", "The download finished")
+        self.progressBar.setValue(0)
+        self.lineEdit.setText('')
+        self.lineEdit_2.setText('')
 
 def main():
     app = QApplication(sys.argv)
