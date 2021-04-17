@@ -25,10 +25,14 @@ class main_app(QMainWindow, FORM_CLASS):
         self.setFixedSize(540,242)
 
     def handel_buttons(self):
-        self.pushButton.clicked.connect(self.download) 
+        self.pushButton.clicked.connect(self.download)
+        self.pushButton_2.clicked.connect(self.handel_browse) 
 
     def handel_browse(self):
-        pass 
+        save_place = QFileDialog.getSaveFileName(self, caption="Save As", directory=".", filter="All Files (*.*)")
+        text = str(save_place)
+        name = (text[2:].split(',')[0].replace("'", ''))
+        self.lineEdit_2.setText(name)
 
     def handel_progress(self, blocknum, blocksize, totalsize):
         read = blocknum * blocksize
