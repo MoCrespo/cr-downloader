@@ -2351,22 +2351,6 @@ PlotWidget {
        </rect>
       </property>
      </widget>
-     <widget class="QProgressBar" name="progressBar_2">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>90</y>
-        <width>311</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
@@ -2388,7 +2372,7 @@ PlotWidget {
        <rect>
         <x>120</x>
         <y>10</y>
-        <width>391</width>
+        <width>321</width>
         <height>31</height>
        </rect>
       </property>
@@ -2437,7 +2421,7 @@ PlotWidget {
        <rect>
         <x>120</x>
         <y>90</y>
-        <width>69</width>
+        <width>181</width>
         <height>22</height>
        </rect>
       </property>
@@ -2453,6 +2437,19 @@ PlotWidget {
       </property>
       <property name="text">
        <string>Quality</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>10</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Search</string>
       </property>
      </widget>
     </widget>
