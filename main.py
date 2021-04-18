@@ -29,8 +29,9 @@ class main_app(QMainWindow, FORM_CLASS):
     def handel_buttons(self):
         self.pushButton.clicked.connect(self.download)
         self.pushButton_2.clicked.connect(self.handel_browse)
-        # self.pushButton_4.clicked.connect(self.download_youtube_video)
-        self.pushButton_5.clicked.connect(self.get_youtube_video) 
+        self.pushButton_4.clicked.connect(self.download_youtube_video)
+        self.pushButton_5.clicked.connect(self.get_youtube_video)
+        self.pushButton_3.clicked.connect(self.save_browse) 
 
 
     def handel_browse(self):
@@ -61,6 +62,10 @@ class main_app(QMainWindow, FORM_CLASS):
         self.lineEdit.setText('')
         self.lineEdit_2.setText('')
 
+    def save_browse(self):
+        save = QFileDialog.getExistingDirectory(self, "Select download directory")
+        self.lineEdit_3.setText(save)
+
     def get_youtube_video(self):
         video_link = self.lineEdit_4.text()
         v = pafy.new(video_link)
@@ -69,6 +74,15 @@ class main_app(QMainWindow, FORM_CLASS):
             size = humanize.naturalsize(s.get_filesize())
             data = '{} {} {} {}'.format(s.mediatype, s.extension, s.quality, size)
             self.comboBox.addItem(data)
+
+    def download_youtube_video(self):
+        video_link = self.lineEdit_4.text()
+        save_location = self.lineEdit_3.text()
+        v = pafy.new(video_link)
+        st = v.allstreams
+        quality = self.comboBox.currentIndex()
+        down = st[quality].download(filepath=save_location)
+        QMessageBox.information(self, "Download Completed", "The download finished")
 
 
 
