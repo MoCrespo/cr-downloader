@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>549</width>
+    <width>545</width>
     <height>242</height>
    </rect>
   </property>
@@ -2239,7 +2239,7 @@ PlotWidget {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -2595,7 +2595,7 @@ PlotWidget {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>549</width>
+     <width>545</width>
      <height>30</height>
     </rect>
    </property>

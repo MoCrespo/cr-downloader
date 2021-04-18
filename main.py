@@ -7,6 +7,8 @@ from PyQt5.uic import loadUiType
 import os 
 from os import path
 import sys
+import pafy
+import humanize
 import urllib.request
 
 FORM_CLASS,_= loadUiType(path.join(path.dirname(__file__),"main.ui"))
@@ -22,11 +24,12 @@ class main_app(QMainWindow, FORM_CLASS):
 
     def handel_UI(self):
         self.setWindowTitle("Cr Downloader")
-        self.setFixedSize(540,242)
+        self.setFixedSize(551,242)
 
     def handel_buttons(self):
         self.pushButton.clicked.connect(self.download)
-        self.pushButton_2.clicked.connect(self.handel_browse) 
+        self.pushButton_2.clicked.connect(self.handel_browse)
+        self.pushButton_4.clicked.connect(self.youtube_video) 
 
     def handel_browse(self):
         save_place = QFileDialog.getSaveFileName(self, caption="Save As", directory=".", filter="All Files (*.*)")
@@ -55,6 +58,17 @@ class main_app(QMainWindow, FORM_CLASS):
         self.progressBar.setValue(0)
         self.lineEdit.setText('')
         self.lineEdit_2.setText('')
+
+    def youtube_video(self):
+        video_link = self.lineEdit_4.text()
+        v = pafy.new(video_link)
+        st = v.allstreams
+        for s in st:
+            size = humanize.naturalsize(s.get_filesize())
+            data = '{} {} {} {}'.format(s.mediatype, s.extension, s.quality, size)
+            self.comboBox.addItem(data)
+
+
 
 def main():
     app = QApplication(sys.argv)
