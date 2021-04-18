@@ -29,7 +29,9 @@ class main_app(QMainWindow, FORM_CLASS):
     def handel_buttons(self):
         self.pushButton.clicked.connect(self.download)
         self.pushButton_2.clicked.connect(self.handel_browse)
-        self.pushButton_4.clicked.connect(self.youtube_video) 
+        # self.pushButton_4.clicked.connect(self.download_youtube_video)
+        self.pushButton_5.clicked.connect(self.get_youtube_video) 
+
 
     def handel_browse(self):
         save_place = QFileDialog.getSaveFileName(self, caption="Save As", directory=".", filter="All Files (*.*)")
@@ -59,7 +61,7 @@ class main_app(QMainWindow, FORM_CLASS):
         self.lineEdit.setText('')
         self.lineEdit_2.setText('')
 
-    def youtube_video(self):
+    def get_youtube_video(self):
         video_link = self.lineEdit_4.text()
         v = pafy.new(video_link)
         st = v.allstreams
