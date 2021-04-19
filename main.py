@@ -8,6 +8,7 @@ import os
 from os import path
 import sys
 import pafy
+from pytube import Playlist
 import humanize
 import urllib.request
 
@@ -31,7 +32,9 @@ class main_app(QMainWindow, FORM_CLASS):
         self.pushButton_2.clicked.connect(self.handel_browse)
         self.pushButton_4.clicked.connect(self.download_youtube_video)
         self.pushButton_5.clicked.connect(self.get_youtube_video)
-        self.pushButton_3.clicked.connect(self.save_browse) 
+        self.pushButton_3.clicked.connect(self.save_browse)
+        self.pushButton_9.clicked.connect(self.download_playlist) 
+        self.pushButton_10.clicked.connect(self.save_browse)
 
 
     def handel_browse(self):
@@ -65,6 +68,7 @@ class main_app(QMainWindow, FORM_CLASS):
     def save_browse(self):
         save = QFileDialog.getExistingDirectory(self, "Select download directory")
         self.lineEdit_3.setText(save)
+        self.lineEdit_10.setText(save)
 
     def get_youtube_video(self):
         video_link = self.lineEdit_4.text()
@@ -83,6 +87,21 @@ class main_app(QMainWindow, FORM_CLASS):
         quality = self.comboBox.currentIndex()
         down = st[quality].download(filepath=save_location)
         QMessageBox.information(self, "Download Completed", "The download finished")
+
+    def download_playlist(self):
+        playlist_url = self.lineEdit_9.text()
+        save_location = self.lineEdit_10.text()
+        playlist = Playlist(playlist_url)
+
+        os.chdir(save_location)
+        if os.path.exists(str(playlist.title)):
+            os.chdir(str(playlist.title))
+        else:
+            os.mkdir(str(playlist.title))
+            os.chdir(str(playlist.title))
+
+        for video in playlist.videos:
+            video.streams.first().download()
 
 
 
