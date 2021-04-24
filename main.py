@@ -55,7 +55,6 @@ class main_app(QMainWindow, FORM_CLASS):
         url = self.lineEdit.text()
         save_location = self.lineEdit_2.text()
         try:
-
             urllib.request.urlretrieve(url, save_location, self.handel_progress)
         except Exception:
             QMessageBox.warning(self, "Download Error", "The download faild")
@@ -85,8 +84,16 @@ class main_app(QMainWindow, FORM_CLASS):
         v = pafy.new(video_link)
         st = v.allstreams
         quality = self.comboBox.currentIndex()
-        down = st[quality].download(filepath=save_location)
+        try:
+            down = st[quality].download(filepath=save_location)
+        except Exception:
+            QMessageBox.warning(self, "Download Error", "The download faild")
+            return
         QMessageBox.information(self, "Download Completed", "The download finished")
+        self.comboBox.clear()
+        self.lineEdit_4.setText('')
+        self.lineEdit_3.setText('')
+
 
     def download_playlist(self):
         playlist_url = self.lineEdit_9.text()
@@ -99,9 +106,17 @@ class main_app(QMainWindow, FORM_CLASS):
         else:
             os.mkdir(str(playlist.title))
             os.chdir(str(playlist.title))
-
-        for video in playlist.videos:
-            video.streams.first().download()
+        
+        try:   
+            for video in playlist.videos:
+                video.streams.first().download()
+        except Exception:
+            QMessageBox.warning(self, "Download Error", "The playlist download faild")
+            return
+        QMessageBox.information(self, "Download Completed", "The download finished")
+        self.lineEdit_9.setText('')
+        self.lineEdit_10.setText('')
+            
 
 
 
