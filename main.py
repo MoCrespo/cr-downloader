@@ -25,6 +25,7 @@ class main_app(QMainWindow, FORM_CLASS):
 
     def handel_UI(self):
         self.setWindowTitle("Cr Downloader")
+        self.setWindowIcon(QIcon('download.png'))
         self.setFixedSize(551,242)
 
     def handel_buttons(self):
